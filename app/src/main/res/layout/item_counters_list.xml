@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="show"
+            type="java.lang.Boolean"/>
+        <variable
+            name="counter"
+            type="com.cornershop.counterstest.domain.models.Counters" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_selected"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{counter.title}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btMinus"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="316dp"
+            android:layout_marginEnd="25dp"
+            android:background="@null"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_minus"
+            android:tint="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btSum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{show ? View.GONE : View.VISIBLE}"
+            android:onClick="@{clickListener}"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+
+            android:id="@+id/tvCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@{String.valueOf(counter.count)}"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btSum"
+            app:layout_constraintStart_toEndOf="@+id/btMinus"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{show ? View.GONE : View.VISIBLE}"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btSum"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_add"
+            android:tint="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btMinus"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{show ? View.GONE : View.VISIBLE}"
+            android:onClick="@{clickListener}"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btCheck"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="43dp"
+            android:layout_height="49dp"
+            android:background="@null"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_check"
+            android:visibility="@{show ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btMinus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </layout>

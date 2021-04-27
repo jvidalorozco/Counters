@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listCounterFragment">
+    <fragment
+        android:id="@+id/listCounterFragment"
+        android:name="com.cornershop.counterstest.presentation.main.ListCounterFragment"
+        android:label="ListCounterFragment" >
+        <action
+            android:id="@+id/action_listCounterFragment_to_newCounterFragment2"
+            app:destination="@id/newCounterFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/newCounterFragment2"
+        android:name="com.cornershop.counterstest.presentation.main.NewCounterFragment"
+        android:label="NewCounterFragment" >
+        <action
+            android:id="@+id/action_newCounterFragment2_to_exampleFragment"
+            app:destination="@id/exampleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exampleFragment"
+        android:name="com.cornershop.counterstest.presentation.main.ExampleFragment"
+        android:label="fragment_example"
+        tools:layout="@layout/fragment_example" >
+        <action
+            android:id="@+id/action_exampleFragment_to_newCounterFragment2"
+            app:destination="@id/newCounterFragment2" />
+    </fragment>
+</navigation>
