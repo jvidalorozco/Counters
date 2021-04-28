@@ -3,6 +3,7 @@ package com.cornershop.counterstest.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cornershop.counterstest.commons.ExceptionHandler
+import com.cornershop.counterstest.commons.idlingresource.EspressoIdlingResource
 import com.cornershop.counterstest.domain.models.Counters
 import com.cornershop.counterstest.domain.usecases.*
 import com.cornershop.counterstest.presentation.states.Error
@@ -116,6 +117,7 @@ internal class MainScreenViewModel constructor(
     }
 
     fun loadCounters() {
+        EspressoIdlingResource.increment()
         getAllCounterJob?.cancel()
         getAllCounterJob = launchCoroutine {
             delay(500)

@@ -3,6 +3,7 @@ package com.cornershop.counterstest.viewmodels
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.cornershop.counterstest.BaseViewModelTest
+import com.cornershop.counterstest.domain.models.Counters
 import com.cornershop.counterstest.presentation.viewmodels.BaseViewModel
 import com.cornershop.counterstest.presentation.viewmodels.MainScreenViewModel
 import com.cornershop.counterstest.testusecases.*
@@ -31,15 +32,74 @@ internal class MainScreenViewModelTest: BaseViewModelTest() {
     // region Tests
 
     @Test
-    fun `given a character url when character details request sent then get character details`() {
+    fun `load data initial when have results`() {
         coroutineTestRule.dispatcher.runBlockingTest {
             prepareViewModel(UiState.SUCCESS)
 
             mainScreenViewModel.loadCounters()
 
-            mainScreenViewModel.countersViewState.observeOnce { detailViewState ->
-                Truth.assertThat(detailViewState.error).isNull()
-                Truth.assertThat(detailViewState.countersResult).isNotEmpty()
+            advanceTimeBy(600)
+
+            mainScreenViewModel.countersViewState.observeOnce { state ->
+                Truth.assertThat(state.error).isNull()
+                Truth.assertThat(state.countersResult).isNotNull()
+                Truth.assertThat(state.countersResult).isNotEmpty()
+
+            }
+        }
+    }
+
+    @Test
+    fun `create new counter success`() {
+        coroutineTestRule.dispatcher.runBlockingTest {
+            prepareViewModel(UiState.SUCCESS)
+
+            mainScreenViewModel.newCounter(Counters("isus","new counter",0))
+
+            advanceTimeBy(600)
+
+            mainScreenViewModel.countersViewState.observeOnce { state ->
+                Truth.assertThat(state.error).isNull()
+                Truth.assertThat(state.countersResult).isNotNull()
+                Truth.assertThat(state.countersResult).isNotEmpty()
+
+            }
+        }
+    }
+
+
+    @Test
+    fun `increment counter success`() {
+        coroutineTestRule.dispatcher.runBlockingTest {
+            prepareViewModel(UiState.SUCCESS)
+
+            mainScreenViewModel.incrementCounter(Counters("isus","new counter",0))
+
+            advanceTimeBy(600)
+
+            mainScreenViewModel.countersViewState.observeOnce { state ->
+                Truth.assertThat(state.error).isNull()
+                Truth.assertThat(state.countersResult).isNotNull()
+                Truth.assertThat(state.countersResult).isNotEmpty()
+
+            }
+        }
+    }
+
+
+    @Test
+    fun `derement counter success`() {
+        coroutineTestRule.dispatcher.runBlockingTest {
+            prepareViewModel(UiState.SUCCESS)
+
+            mainScreenViewModel.decrementCounter(Counters("isus","new counter",0))
+
+            advanceTimeBy(600)
+
+            mainScreenViewModel.countersViewState.observeOnce { state ->
+                Truth.assertThat(state.error).isNull()
+                Truth.assertThat(state.countersResult).isNotNull()
+                Truth.assertThat(state.countersResult).isNotEmpty()
 
             }
         }
